@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8">
 
-  <title>REST and RDF in Drupal 8</title>
+  <title>REST in Drupal 8</title>
 
   <meta name="description"
-        content="REST and RDF capabilities of Drupal 8, presented at ESIP 2016">
+        content="REST capabilities of Drupal 8, presented at ESIP 2016">
   <meta name="author" content="Kosta Harlan">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,14 +47,13 @@
 
     <!-- Title slide -->
     <section>
-      <h1>REST and RDF in Drupal 8</h1>
-      <h2>How machines can talk to Drupal</h2>
+      <h1>REST in Drupal 8</h1>
       <p class="centered">Kosta Harlan @ Savas Labs</p>
     </section>
 
     <!-- Introduction slide -->
     <section class="intro-slide">
-      <h2>A bit about us</h2>
+      <h2>A bit about me</h2>
       <p class="centered"></p>
       <div class="img-left">
         <img width="300" src="images/durham.jpg" alt="Durham skyline by Jessie Gladin Kramer">
@@ -69,142 +68,25 @@
 
     <section>
       <h2>What we'll discuss today</h2>
-      <ul>
-        <li class="fragment">Semantic Markup</li>
-        <ul>
-            <li class="fragment">A look at Schema.org mappings and RDF support in Drupal 8</li>
-        </ul>
-        <li class="fragment">Web services</li>
-        <aside class="notes">
-            <blockquote>A Web service is a software system designed to support interoperable machine-to-machine interaction over a network.</blockquote>
-        </aside>
-        <ul>
-            <li class="fragment">Implementing a REST API for a Drupal 8 site</li>
-        </ul>
-      </ul>
-    </section>
-
-    <section>
-        <section>
-          <h2>RDF and Schema.org mappings in D8</h2>
-          <h3 class="inline-heading">D7</h3>
-            <pre class="no-box-shadow"><code class="html" data-trim>
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; version=&quot;XHTML+RDFa 1.0&quot; dir=&quot;ltr&quot;
-  xmlns:content=&quot;http://purl.org/rss/1.0/modules/content/&quot;
-  xmlns:dc=&quot;http://purl.org/dc/terms/&quot;
-  xmlns:foaf=&quot;http://xmlns.com/foaf/0.1/&quot;
-  xmlns:og=&quot;http://ogp.me/ns#&quot;
-  xmlns:rdfs=&quot;http://www.w3.org/2000/01/rdf-schema#&quot;
-  xmlns:sioc=&quot;http://rdfs.org/sioc/ns#&quot;
-  xmlns:sioct=&quot;http://rdfs.org/sioc/types#&quot;
-  xmlns:skos=&quot;http://www.w3.org/2004/02/skos/core#&quot;
-  xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema#&quot;&gt;
-            </code></pre>
-
-            <h3 class="inline-heading">D8</h3>
-            <pre class="no-box-shadow"><code class="html" data-trim>
-&lt;html lang=&quot;en&quot; dir=&quot;ltr&quot; prefix=&quot;content: http://purl.org/rss/1.0/modules/content/
-dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/
-og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#
-schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#
-sioct: http://rdfs.org/sioc/types#
-skos: http://www.w3.org/2004/02/skos/core#
-xsd: http://www.w3.org/2001/XMLSchema# &quot;&gt;
-            </code></pre>
-        </section>
-        <section>
-          <h2>RDF and Schema.org mappings in D8</h2>
-            <pre><code class="html" data-trim>
-&lt;div id=&quot;node-1&quot; class=&quot;node node-article node-promoted node-full clearfix&quot;
-     about=&quot;/node/1&quot; typeof=&quot;sioc:Item foaf:Document&quot;&gt;
-    &lt;span property=&quot;dc:title&quot; content=&quot;Test&quot; class=&quot;rdf-meta element-hidden&quot;&gt;
-    &lt;/span&gt;
-    &lt;span property=&quot;sioc:num_replies&quot; content=&quot;0&quot;
-          datatype=&quot;xsd:integer&quot;
-          class=&quot;rdf-meta element-hidden&quot;&gt;&lt;/span&gt;
-&lt;div class=&quot;meta submitted&quot;&gt;
-  &lt;span property=&quot;dc:date dc:created&quot; content=&quot;2016-07-14T10:12:34-04:00&quot;
-        datatype=&quot;xsd:dateTime&quot; rel=&quot;sioc:has_creator&quot;&gt;
-      Submitted by
-      &lt;span class=&quot;username&quot; xml:lang=&quot;&quot; about=&quot;/user/1&quot;
-            typeof=&quot;sioc:UserAccount&quot; property=&quot;foaf:name&quot; datatype=&quot;&quot;&gt;
-            admin&lt;/span&gt; on Thu, 07/14/2016 - 10:12&lt;/span&gt;    &lt;/div&gt;
-  &lt;div class=&quot;content clearfix&quot;&gt;
-      &lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;
-          &lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot; property=&quot;content:encoded&quot;&gt;
-              &lt;p&gt;Hello&lt;/p&gt;
-&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;  &lt;/div&gt;
-    &lt;/div&gt;
-            </code></pre>
-        </section>
-        <section>
-          <h2>RDF and Schema.org mappings in D8</h2>
-            <pre><code data-trim class="html">
-&lt;article data-history-node-id=&quot;101&quot; role=&quot;article&quot; about=&quot;/node/101&quot;
-         typeof=&quot;schema:Article&quot; class=&quot;node node--type-article node--promoted node--view-mode-full clearfix&quot;&gt;
-&lt;header&gt;
-  &lt;span property=&quot;schema:name&quot; content=&quot;Test&quot; class=&quot;rdf-meta hidden&quot;&gt;&lt;/span&gt;
-  &lt;span property=&quot;schema:interactionCount&quot; content=&quot;UserComments:0&quot;
-        class=&quot;rdf-meta hidden&quot;&gt;&lt;/span&gt;
-&lt;div class=&quot;node__meta&quot;&gt;
-  &lt;article typeof=&quot;schema:Person&quot; about=&quot;/user/1&quot; class=&quot;profile&quot;&gt;
-  &lt;/article&gt;
-&lt;span&gt;
-    Submitted by &lt;span rel=&quot;schema:author&quot; class=&quot;field field--name-uid field--type-entity-reference field--label-hidden&quot;&gt;
-    &lt;span lang=&quot;&quot; about=&quot;/user/1&quot; typeof=&quot;schema:Person&quot;
-          property=&quot;schema:name&quot; datatype=&quot;&quot;&gt;admin&lt;/span&gt;&lt;/span&gt;
-    on &lt;span property=&quot;schema:dateCreated&quot; content=&quot;2016-07-14T14:22:07+00:00&quot;
-             class=&quot;field field--name-created field--type-created field--label-hidden&quot;&gt;
-        Thu, 07/14/2016 - 14:22&lt;/span&gt;
-        &lt;/span&gt;
-        &lt;span property=&quot;schema:dateCreated&quot; content=&quot;2016-07-14T14:22:07+00:00&quot;
-              class=&quot;rdf-meta hidden&quot;&gt;&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;/header&gt;
-  &lt;div class=&quot;node__content clearfix&quot;&gt;
-      &lt;div property=&quot;schema:text&quot; class=&quot;clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item&quot;&gt;
-          &lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt;
-      &lt;section rel=&quot;schema:comment&quot; class=&quot;field field--name-comment field--type-comment field--label-above comment-wrapper&quot;&gt;
-      &lt;/section&gt;
-  &lt;/div&gt;
-            &lt;/article&gt;
-            </code></pre>
-      </section>
-
-      <section>
-        <h2>RDF and Schema.org mappings in D8</h2>
-        <h3 class="fragment">Strengths</h3>
-          <ul>
-              <li class="fragment">Out of the box, things "just work" with basic mappings</li>
-              <li class="fragment">Core support for RDF means developers can rely on a stable API</li>
-          </ul>
-      </section>
-      <section>
-        <h2>RDF and Schema.org mappings in D8</h2>
-        <h3 class="fragment">Weaknesses</h3>
-          <ul class="compact-list">
-              <li class="fragment">Problems with mixing RDFa/microdata and HTML markup</li>
-              <ul>
-                  <li class="fragment">Complex</li>
-                  <li class="fragment">Field formatters need to be tested</li>
-                  <li class="fragment">Data is less accessible, you need a special parser</li>
-              </ul>
-              <li class="fragment">RDF in core hasn't been updated much since Schema.org mappings were added</li>
-              <li class="fragment">Development on RDF UI isn't moving quickly</li>
-              <li class="fragment">JSON-LD support is not planned for core, not yet anyway</li>
-          </ul>
-      </section>
-
+      <ol>
+          <li class="fragment">Brief look at the evolution of Drupal's REST capabilities</li>
+          <li class="fragment">Views and implementing a GET API for JSON/XML requests</li>
+          <li class="fragment">Using Drupal's RESTful API module with REST UI</li>
+          <li class="fragment">Self Documenting REST API</li>
+          <li class="fragment">Entity Query API</li>
+          <li class="fragment">Rest Resource Plugins</li>
+          <li class="fragment">Other plugins</li>
+      </ol>
     </section>
 
     <!-- Fragment styles -->
     <section>
       <section>
-        <h2>REST in D8</h2>
+        <h2>1. Web services + Drupal</h2>
         <h3>This isn't something new in Drupal</h3>
-        <pre><code class="hljs fragment" data-trim contenteditable>
-      commit 1b7510eebf0da114677408674e552201ff0711c9
-Author: Dries Buytaert <dries@buytaert.net>
+        <pre><code class="hljs fragment" data-trim>
+commit 1b7510eebf0da114677408674e552201ff0711c9
+Author: Dries Buytaert &lt;dries@buytaert.net&gt;
 Date:   Sun Sep 9 16:47:10 2001 +0000
 
     - Added an XML-RPC server.  Modules that want to export remote procedure
@@ -213,59 +95,43 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
       Example:
 
        function mymodule_xmlrpc() {
-         return array("drupal.myfunction" => array("function" => "mymodule_myfunction"));
+         return array(&quot;drupal.myfunction&quot; =&gt; array(&quot;function&quot; =&gt; &quot;mymodule_myfunction&quot;));
        }
         </code></pre>
 
       </section>
 
       <section>
-        <h2>REST in D8</h2>
-        <h3>Cast of characters</h3>
-          <ul>
-              <li>restui [contrib]</li>
-              <li>serialization</li>
-              <li>rest_api_doc [contrib]</li>
-              <li>rest</li>
-              <li>hal</li>
-              <li>basic_auth</li>
-              <li>simple_oauth [contrib]</li>
-          </ul>
+          <blockquote>In my view, we need to do the following [...] (1) facilitate a single robust REST module in core; (2) add functionality to help web services modules more easily query and manipulate Drupal's entity graph; (3) incorporate GraphQL and JSON API out of the box; and (4) add SDKs enabling easy integration with Drupal.</blockquote>
+      </section>
+      <section>
+<table>
+<tbody>
+<tr>
+<th>8.2 (Q4 2016)</th>
+<th>8.3 (Q2 2017)</th>
+<th>Beyond 8.3 (2017+)</th>
+</tr>
+<tr>
+<td>New REST API capabilities<br />Waterwheel initial release</td>
+<td>New REST API capabilities<br />JSON API module</td>
+<td>GraphQL module?<br />Entity graph iterator?</td>
+</tr>
+</tbody>
+</table>
       </section>
 
     </section>
 
     <section>
-        <section>
-          <h2 class="small-h2">Install Drupal & prepare a site</h2>
-          <video>
-                <source data-src="videos/install-drupal.webm" type="video/webm" />
-            </video>
-        </section>
-        <section>
-          <h2 class="small-h2">Install Drupal & prepare a site</h2>
-          <video>
-                <source data-src="videos/content-overview.webm" type="video/webm" />
-            </video>
-        </section>
-    </section>
-
-    <section>
-        <h2>Using Views</h2>
-        <video>
-            <source data-src="videos/article-page-view.webm"  type="video/webm" />
-        </video>
-    </section>
-
-    <section>
-        <h2>Using Views: Instant GET API</h2>
+        <h2>2. Views + REST: Create a GET API</h2>
         <video>
             <source data-src="videos/article-api-view.webm"  type="video/webm" />
         </video>
     </section>
 
     <section>
-        <h2>Using Views: Simplified</h2>
+        <h2>Views + REST: Using fields</h2>
         <video>
             <source data-src="videos/article-api-view-revised.webm"  type="video/webm" />
         </video>
@@ -273,13 +139,7 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
 
     <section>
         <section>
-          <h2 class="small-h2">Using Views: Multiple Formats</h2>
-          <video>
-                <source data-src="videos/request-different-formats.webm"  type="video/webm" />
-            </video>
-        </section>
-        <section>
-          <h2 class="small-h2">Using Views: Multiple Formats</h2>
+          <h2 class="small-h2">Views + REST: Multiple Formats</h2>
           <code>curl http://esip.demo:8888/api/articles?_format=json</code>
             <pre><code class="json" data-trim contenteditable>
 [
@@ -295,7 +155,7 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
             </code></pre>
         </section>
         <section>
-          <h2 class="small-h2">Using Views: Multiple Formats</h2>
+          <h2 class="small-h2">Views + REST: Multiple Formats</h2>
           <code>curl http://esip.demo:8888/api/articles?_format=xml</code>
 <pre><code class="xml" data-trim contenteditable>
 <?xml version="1.0"?>
@@ -314,17 +174,340 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
     </section>
 
     <section>
-        <h2>REST UI</h2>
+        <h2>Other formats</h2>
+        <ul>
+            <li class="fragment">HAL JSON</li>
+            <li class="fragment">JSON API</li>
+            <li class="fragment">Views GeoJSON</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Real world example: Views GeoJSON</h2>
+        <img src="images/durham-civil-rights-map.png" alt="Durham Civil Rights Map homepage">
+    </section>
+    <section>
+        <img src="images/durham-civil-rights-map-places.png" alt="Places listing page">
+    </section>
+    <section>
+        <code>GET http://www.durhamcivilrightsmap.org/points?_format=json</code>code
+        <pre><code class="json" contenteditable>
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.90242,
+          36.02799
+        ]
+      },
+      "properties": {
+        "name": "<a href=\"/places/3-desegregating-durham-athletic-park\" hreflang=\"en\">Desegregating the Durham Athletic Park</a>",
+        "description": "<p>The black community began protesting to integrate this signature athletic park, home to the Durham Bulls Baseball Club in 1957 when the first two black players, Bubba Norton and Ted Richardson, were added to the roster.</p>",
+        "field_address_text": "500 W. Corporation Street, Durham, NC  27701",
+        "field_photos": "  <a href=\"/places/3-desegregating-durham-athletic-park\"><img src=\"/sites/default/files/styles/slideshow/public/place_photos/DAP1.jpg?itok=kd9IBhtu\" width=\"300\" height=\"202\" alt=\"This picture shows the entrance to the original ball park. People were gathered around the entrance for a rally. Circa 1968. Photo courtesy of the Herald-Sun Newspaper and Open Durham.com. \" typeof=\"foaf:Image\" class=\"image-style-slideshow\" />\n\n</a>\n,   <a href=\"/places/3-desegregating-durham-athletic-park\"><img src=\"/sites/default/files/styles/slideshow/public/place_photos/DAP2.jpg?itok=MnKf-Uu4\" width=\"300\" height=\"173\" alt=\"This picture shows the original ball park before it was renamed to the Durham Athletic Park. Circa 1930. Photo courtesy of Duke Rare Books and Manuscript Collection and Open Durham.com. \" typeof=\"foaf:Image\" class=\"image-style-slideshow\" />\n\n</a>\n",
+        "First photo": "  <img src=\"/sites/default/files/place_photos/DAP1.jpg\" width=\"320\" height=\"215\" alt=\"This picture shows the entrance to the original ball park. People were gathered around the entrance for a rally. Circa 1968. Photo courtesy of the Herald-Sun Newspaper and Open Durham.com. \" typeof=\"foaf:Image\" />\n\n",
+        "field_tags": "<a href=\"/taxonomy/term/1\" hreflang=\"en\">Civil Rights</a>, <a href=\"/taxonomy/term/2\" hreflang=\"en\">Desegregation</a>, <a href=\"/taxonomy/term/3\" hreflang=\"en\">Athletics</a>",
+        "title_1": "Desegregating the Durham Athletic Park",
+        "view_node": "<a href=\"/places/3-desegregating-durham-athletic-park\" hreflang=\"en\">Read and hear more</a>",
+        "nothing": "<div class=\"sidebar__node-content\">\n<h3><a href=\"/places/3-desegregating-durham-athletic-park\" hreflang=\"en\">Desegregating the Durham Athletic Park</a></h3>\n<hr>\n<div class=\"sidebar__node-content__address\"><p>500 W. Corporation Street, Durham, NC  27701</p></div>\n<div class=\"sidebar__node-content__photos\">  <img src=\"/sites/default/files/place_photos/DAP1.jpg\" width=\"320\" height=\"215\" alt=\"This picture shows the entrance to the original ball park. People were gathered around the entrance for a rally. Circa 1968. Photo courtesy of the Herald-Sun Newspaper and Open Durham.com. \" typeof=\"Image\" />\n\n</div>\n<div class=\"sidebar__node-content__body\"><p>The black community began protesting to integrate this signature athletic park, home to the Durham Bulls Baseball Club in 1957 when the first two black players, Bubba Norton and Ted Richardson, were added to the roster.</p></div>\n<div class=\"sidebar__node-content__more-link\"><a href=\"/places/3-desegregating-durham-athletic-park\" hreflang=\"en\">Read and hear more</a></div>\n<div class=\"sidebar__node-content__tags\"><a href=\"/taxonomy/term/1\" hreflang=\"en\">Civil Rights</a>, <a href=\"/taxonomy/term/2\" hreflang=\"en\">Desegregation</a>, <a href=\"/taxonomy/term/3\" hreflang=\"en\">Athletics</a></div>\n</div>"
+      }
+    },
+  }
+}
+        </code></pre>
+    </section>
+    <section>
+        <h2>3. RESTful Web Services module + REST UI</h2>
         <video>
             <source data-src="videos/rest-ui.webm"  type="video/webm" />
         </video>
     </section>
 
     <section>
-        <h2>Self-Documenting API</h2>
+        <h2>4.Self-Documenting API</h2>
         <video>
             <source data-src="videos/self-documenting.webm"  type="video/webm" />
         </video>
+    </section>
+
+    <section>
+        <h2>5. Entity Query API</h2>
+        <ul>
+            <li class="fragment">Ranges</li>
+            <li class="fragment">Sorts</li>
+            <li class="fragment">Conditions</li>
+            <li class="fragment">Condition Groups</li>
+        </ul>
+    </section>
+
+    <section>
+        GET <code>/entity/node?_format=json&condition_0[field]=type&condition_0[value]=article&condition_0[operator]=EQ&range[start]=0&range[length]=1</code>
+        <pre><code class="json" contenteditable>
+[
+  {
+    "nid": [
+      {
+        "value": "3"
+      }
+    ],
+    "uuid": [
+      {
+        "value": "8597f291-4c43-4758-a034-52a4549fd883"
+      }
+    ],
+    "vid": [
+      {
+        "value": "3"
+      }
+    ],
+    "langcode": [
+      {
+        "value": "en"
+      }
+    ],
+    "type": [
+      {
+        "target_id": "article",
+        "target_type": "node_type",
+        "target_uuid": "c4b6fd01-9365-4155-9204-4d5006387567"
+      }
+    ],
+    "title": [
+      {
+        "value": "Info about the summer league"
+      }
+    ],
+    "uid": [
+      {
+        "target_id": "2",
+        "target_type": "user",
+        "target_uuid": "0e465925-1cb4-4d34-8c00-a51f46b3a7ff",
+        "url": "/user/2"
+      }
+    ],
+    "status": [
+      {
+        "value": "1"
+      }
+    ],
+    "created": [
+      {
+        "value": "1430183142"
+      }
+    ],
+    "changed": [
+      {
+        "value": "1445563827"
+      }
+    ],
+    "promote": [
+      {
+        "value": "1"
+      }
+    ],
+    "sticky": [
+      {
+        "value": "0"
+      }
+    ],
+    "revision_timestamp": [
+      {
+        "value": "1445562394"
+      }
+    ],
+    "revision_uid": [
+      {
+        "target_id": "1",
+        "target_type": "user",
+        "target_uuid": "df48812d-70be-4b77-9205-05b75e787fdf",
+        "url": "/user/1"
+      }
+    ],
+    "revision_log": [],
+    "revision_translation_affected": [
+      {
+        "value": "1"
+      }
+    ],
+    "default_langcode": [
+      {
+        "value": "1"
+      }
+    ],
+    "path": [],
+    "content_translation_source": [],
+    "content_translation_outdated": [],
+    "body": [
+      {
+        "value": "<p>Thanks for playing this season. We had a great final night and many of you were able to join us for the post-season celebration at GarageBar. We presented the trophy to Mattie B’s (congratulations), and we also named our Best V and Second-best V teams. (The list is below.)</p>\r\n\r\n<p>We have a few extra T-shirts–designed by fellow player Brendan Ward of <a href=\"http://www.studioharbor.com/\">Harbor Design Studio</a>. A number of you weren’t present for the final game. Drop us a line and your shirt size, and we’ll figure out how to get it to you.</p>\r\n\r\n<p>As promised, here is more information about where we are in planning for the summer.</p>\r\n\r\n<p><strong>When:</strong> We’re planning to start the week of June 15. That’s a Monday. We will continue to schedule games for Tuesdays, but there is a good chance we will have more teams. If this happens, we’ll likely need to add a night, which is likely to be Monday.</p>\r\n\r\n<p><strong>Where:</strong> If it’s dry and not too hot, we’ll play outdoors at Sherwood Park. For an indoor location, we have reserved Edison Johnson Rec Center in Northgate Park. It’s only available on Mondays. It’s also quite expensive and we can’t get the cost down until our cooperative agreement with Parks and Rec takes effect in the fall. So, we’re hoping to line up another public school gym like Lucas, which would be cheaper and possibly available on Tuesdays.</p>\r\n\r\n<p><strong>Who:</strong> We are actively recruiting new players. There is a chance we will have as many as 10 or 12 teams. If we grow that large, we’ll likely look for a way to create two divisions, grouping them by competitiveness.</p>\r\n\r\n<p><strong>Cost:</strong> Right now we are projecting the per-player cost to be in the neighborhood of $50. We may set a per-team price, too, for squads that prefer to be organized that way.</p>\r\n\r\n<h2 id=\"how-you-can-play-for-free\">How you can play for free</h2>\r\n\r\n<ul>\r\n\t<li><strong>Join our operations committee.</strong> We need a few people to help us set up games (put out the goals, inflate the balls, make sure the ref shows up) and break them down. We could also use help in other areas, such as translating our website into Spanish.</li>\r\n\t<li><strong>Help us with our futsal clinics.</strong> David Beck and David Fellerath will be organizing youth futsal clinics to be given at Park and Rec centers in September and October. If you can commit five or six hours to one of these clinics, drop us a line ASAP and I’ll give you more info. The key to our upcoming cooperative agreement with the city is putting on programs for kids. In return, our future facility expenses will be next to nothing. Please help if you can.</li>\r\n\t<li><strong>Recruit new players.</strong> Recruit two new players and play for free. Recruit one and play for half-price.</li>\r\n</ul>\r\n\r\n<p>Kosta and I hope to have the website updated and ready for registration within a couple of weeks. We’ll let you know when we’re ready to register.</p>\r\n\r\n<p>In the meantime, please let us know if you’re interested in the “play for free” options 1 or 2 above.</p>\r\n\r\n<p>See you soon! David &amp; Kosta</p>\r\n\r\n<h2 id=\"best-v\">Best V</h2>\r\n\r\n<ul>\r\n\t<li>Misael Gutierrez (Mattie’s)</li>\r\n\t<li>Nick Christie (McCabe’s)</li>\r\n\t<li>Dane Summerell (Freelancers)</li>\r\n\t<li>Daniel Seed (Motorco)</li>\r\n\t<li>Rob Weldon (Market Failure)</li>\r\n</ul>\r\n\r\n<h2 id=\"second-best-v\">Second-best V</h2>\r\n\r\n<ul>\r\n\t<li>Shawn Olender (Mattie’s)</li>\r\n\t<li>David Beck (Motorco)</li>\r\n\t<li>Finn Katz (Motorco)</li>\r\n\t<li>Oscar Barsallo (Market Failure)</li>\r\n\t<li>Wisdom Deku (All Stars)</li>\r\n</ul>\r\n\r\n<p>Congrats all!</p>\r\n",
+        "format": "basic_html",
+        "summary": ""
+      }
+    ],
+    "comment": [
+      {
+        "status": "2",
+        "cid": "0",
+        "last_comment_timestamp": "1445562415",
+        "last_comment_name": null,
+        "last_comment_uid": "1",
+        "comment_count": "0"
+      }
+    ],
+    "field_image": [
+      {
+        "target_id": "3",
+        "alt": "Last game of opening season at Sherwood Park",
+        "title": "",
+        "width": "800",
+        "height": "482",
+        "target_type": "file",
+        "target_uuid": "272157fe-9115-4486-be07-7e330c1ac396",
+        "url": "https://local.durhamatletico.com/sites/default/files/2015-10/blog-last-game.jpg"
+      }
+    ],
+    "field_tags": [
+      {
+        "target_id": "2",
+        "target_type": "taxonomy_term",
+        "target_uuid": "645cddeb-acca-495b-af05-5fe266a2efda",
+        "url": "/taxonomy/term/2"
+      },
+      {
+        "target_id": "1",
+        "target_type": "taxonomy_term",
+        "target_uuid": "46b97550-229a-45b2-a900-f83bcf4b7796",
+        "url": "/taxonomy/term/1"
+      }
+    ]
+  }
+]
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>6. Rest Resource Plugins</h2>
+        <pre><code class="php">
+&lt;?php
+
+namespace Drupal\durhamatletico_api\Plugin\rest\resource;
+
+use Drupal\rest\Plugin\ResourceBase;
+use Drupal\rest\ResourceResponse;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Drupal\node\Entity\Node;
+
+/**
+ * Provides a resource to get view modes by entity and bundle.
+ *
+ * @RestResource(
+ *   id = &quot;tournament_rest_resource&quot;,
+ *   label = @Translation(&quot;Tournaments for bracket display&quot;),
+ *   uri_paths = {
+ *     &quot;canonical&quot; = &quot;/api/tournaments/{nid}&quot;
+ *   }
+ * )
+ */
+class TournamentRestResource extends ResourceBase {
+
+  /**
+   * Responds to GET requests.
+   *
+   * Returns formatted output for use with bracket JS.
+   *
+   * @param int $nid
+   *   The node ID of the tournament, e.g. 1655.
+   *
+   * @return \Drupal\rest\ResourceResponse
+   *   The response containing the log entry.
+   *
+   * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+   *   Thrown when the tournament entry was not found.
+   * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+   *   Thrown when no tournament entry was provided.
+   */
+  public function get($nid = NULL) {
+    return new ResourceResponse($response);
+  }
+        </code></pre>
+    </section>
+
+    <section>
+        <code>GET /api/tournaments/1210?_format=json</code>
+        <pre><code class="json">
+{
+  "teams": [
+    [
+      "MVFC",
+      "Esemplastic"
+    ],
+    [
+      "Hustle & Flow",
+      "Regulators"
+    ],
+    [
+      "Green Street",
+      "Pitbulls"
+    ],
+    [
+      "Real Durham",
+      "Muchos Nachos"
+    ]
+  ],
+  "results": [
+    [
+      [
+        3,
+        0
+      ],
+      [
+        10,
+        5
+      ],
+      [
+        6,
+        7
+      ],
+      [
+        17,
+        9
+      ]
+    ],
+    [
+      [
+        8,
+        10
+      ],
+      [
+        10,
+        8
+      ]
+    ],
+    []
+  ]
+}
+        </code></pre>
+    </section>
+    <section>
+        <img src="images/durham-atletico-brackets.png" alt="Durham Atletico brackets">
+    </section>
+
+    <section>
+        <h2>7. Extensions for REST in D8</h2>
+        <ul>
+            <li class="fragment">RELAXED</li>
+            <li class="fragment">Simple OAuth, Oauth</li>
+            <li class="fragment">Waterwheel</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Questions?</h2>
     </section>
 
 
