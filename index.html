@@ -174,6 +174,50 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
     </section>
 
     <section>
+        <h2>Other formats</h2>
+        <ul>
+            <li class="fragment">HAL JSON</li>
+            <li class="fragment">JSON API</li>
+            <li class="fragment">Views GeoJSON</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Real world example: Views GeoJSON</h2>
+        <img src="images/durham-civil-rights-map.png" alt="Durham Civil Rights Map homepage">
+    </section>
+    <section>
+        <code>GET http://www.durhamcivilrightsmap.org/points?_format=json</code>code
+        <pre><code class="json" contenteditable>
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.90242,
+          36.02799
+        ]
+      },
+      "properties": {
+        "name": "<a href=\"/places/3-desegregating-durham-athletic-park\" hreflang=\"en\">Desegregating the Durham Athletic Park</a>",
+        "description": "<p>The black community began protesting to integrate this signature athletic park, home to the Durham Bulls Baseball Club in 1957 when the first two black players, Bubba Norton and Ted Richardson, were added to the roster.</p>",
+        "field_address_text": "500 W. Corporation Street, Durham, NC  27701",
+        "field_photos": "  <a href=\"/places/3-desegregating-durham-athletic-park\"><img src=\"/sites/default/files/styles/slideshow/public/place_photos/DAP1.jpg?itok=kd9IBhtu\" width=\"300\" height=\"202\" alt=\"This picture shows the entrance to the original ball park. People were gathered around the entrance for a rally. Circa 1968. Photo courtesy of the Herald-Sun Newspaper and Open Durham.com. \" typeof=\"foaf:Image\" class=\"image-style-slideshow\" />\n\n</a>\n,   <a href=\"/places/3-desegregating-durham-athletic-park\"><img src=\"/sites/default/files/styles/slideshow/public/place_photos/DAP2.jpg?itok=MnKf-Uu4\" width=\"300\" height=\"173\" alt=\"This picture shows the original ball park before it was renamed to the Durham Athletic Park. Circa 1930. Photo courtesy of Duke Rare Books and Manuscript Collection and Open Durham.com. \" typeof=\"foaf:Image\" class=\"image-style-slideshow\" />\n\n</a>\n",
+        "First photo": "  <img src=\"/sites/default/files/place_photos/DAP1.jpg\" width=\"320\" height=\"215\" alt=\"This picture shows the entrance to the original ball park. People were gathered around the entrance for a rally. Circa 1968. Photo courtesy of the Herald-Sun Newspaper and Open Durham.com. \" typeof=\"foaf:Image\" />\n\n",
+        "field_tags": "<a href=\"/taxonomy/term/1\" hreflang=\"en\">Civil Rights</a>, <a href=\"/taxonomy/term/2\" hreflang=\"en\">Desegregation</a>, <a href=\"/taxonomy/term/3\" hreflang=\"en\">Athletics</a>",
+        "title_1": "Desegregating the Durham Athletic Park",
+        "view_node": "<a href=\"/places/3-desegregating-durham-athletic-park\" hreflang=\"en\">Read and hear more</a>",
+        "nothing": "<div class=\"sidebar__node-content\">\n<h3><a href=\"/places/3-desegregating-durham-athletic-park\" hreflang=\"en\">Desegregating the Durham Athletic Park</a></h3>\n<hr>\n<div class=\"sidebar__node-content__address\"><p>500 W. Corporation Street, Durham, NC  27701</p></div>\n<div class=\"sidebar__node-content__photos\">  <img src=\"/sites/default/files/place_photos/DAP1.jpg\" width=\"320\" height=\"215\" alt=\"This picture shows the entrance to the original ball park. People were gathered around the entrance for a rally. Circa 1968. Photo courtesy of the Herald-Sun Newspaper and Open Durham.com. \" typeof=\"Image\" />\n\n</div>\n<div class=\"sidebar__node-content__body\"><p>The black community began protesting to integrate this signature athletic park, home to the Durham Bulls Baseball Club in 1957 when the first two black players, Bubba Norton and Ted Richardson, were added to the roster.</p></div>\n<div class=\"sidebar__node-content__more-link\"><a href=\"/places/3-desegregating-durham-athletic-park\" hreflang=\"en\">Read and hear more</a></div>\n<div class=\"sidebar__node-content__tags\"><a href=\"/taxonomy/term/1\" hreflang=\"en\">Civil Rights</a>, <a href=\"/taxonomy/term/2\" hreflang=\"en\">Desegregation</a>, <a href=\"/taxonomy/term/3\" hreflang=\"en\">Athletics</a></div>\n</div>"
+      }
+    },
+  }
+}
+        </code></pre>
+    </section>
+    <section>
         <h2>3. RESTful Web Services module + REST UI</h2>
         <video>
             <source data-src="videos/rest-ui.webm"  type="video/webm" />
