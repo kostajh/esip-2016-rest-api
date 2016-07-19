@@ -138,4 +138,17 @@ body {
       text-align: center;
     }
   }
+
+  .inline-heading {
+    float: left;
+    margin-right: .25em;
+  }
+
+  .no-box-shadow {
+    box-shadow: none;
+  }
+
+  .small-h2 {
+    font-size: 2em;
+  }
 }
