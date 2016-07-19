@@ -188,18 +188,211 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
     </section>
 
     <section>
-        <h2>5. Entiy Query API</h2>
-        
+        <h2>5. Entity Query API</h2>
+        <ul>
+            <li class="fragment">Ranges</li>
+            <li class="fragment">Sorts</li>
+            <li class="fragment">Conditions</li>
+            <li class="fragment">Condition Groups</li>
+        </ul>
+    </section>
+
+    <section>
+        GET <code>/entity/node?_format=json&condition_0[field]=type&condition_0[value]=article&condition_0[operator]=EQ&range[start]=0&range[length]=1</code>
+        <pre><code class="json" contenteditable>
+[
+  {
+    "nid": [
+      {
+        "value": "3"
+      }
+    ],
+    "uuid": [
+      {
+        "value": "8597f291-4c43-4758-a034-52a4549fd883"
+      }
+    ],
+    "vid": [
+      {
+        "value": "3"
+      }
+    ],
+    "langcode": [
+      {
+        "value": "en"
+      }
+    ],
+    "type": [
+      {
+        "target_id": "article",
+        "target_type": "node_type",
+        "target_uuid": "c4b6fd01-9365-4155-9204-4d5006387567"
+      }
+    ],
+    "title": [
+      {
+        "value": "Info about the summer league"
+      }
+    ],
+    "uid": [
+      {
+        "target_id": "2",
+        "target_type": "user",
+        "target_uuid": "0e465925-1cb4-4d34-8c00-a51f46b3a7ff",
+        "url": "/user/2"
+      }
+    ],
+    "status": [
+      {
+        "value": "1"
+      }
+    ],
+    "created": [
+      {
+        "value": "1430183142"
+      }
+    ],
+    "changed": [
+      {
+        "value": "1445563827"
+      }
+    ],
+    "promote": [
+      {
+        "value": "1"
+      }
+    ],
+    "sticky": [
+      {
+        "value": "0"
+      }
+    ],
+    "revision_timestamp": [
+      {
+        "value": "1445562394"
+      }
+    ],
+    "revision_uid": [
+      {
+        "target_id": "1",
+        "target_type": "user",
+        "target_uuid": "df48812d-70be-4b77-9205-05b75e787fdf",
+        "url": "/user/1"
+      }
+    ],
+    "revision_log": [],
+    "revision_translation_affected": [
+      {
+        "value": "1"
+      }
+    ],
+    "default_langcode": [
+      {
+        "value": "1"
+      }
+    ],
+    "path": [],
+    "content_translation_source": [],
+    "content_translation_outdated": [],
+    "body": [
+      {
+        "value": "<p>Thanks for playing this season. We had a great final night and many of you were able to join us for the post-season celebration at GarageBar. We presented the trophy to Mattie B’s (congratulations), and we also named our Best V and Second-best V teams. (The list is below.)</p>\r\n\r\n<p>We have a few extra T-shirts–designed by fellow player Brendan Ward of <a href=\"http://www.studioharbor.com/\">Harbor Design Studio</a>. A number of you weren’t present for the final game. Drop us a line and your shirt size, and we’ll figure out how to get it to you.</p>\r\n\r\n<p>As promised, here is more information about where we are in planning for the summer.</p>\r\n\r\n<p><strong>When:</strong> We’re planning to start the week of June 15. That’s a Monday. We will continue to schedule games for Tuesdays, but there is a good chance we will have more teams. If this happens, we’ll likely need to add a night, which is likely to be Monday.</p>\r\n\r\n<p><strong>Where:</strong> If it’s dry and not too hot, we’ll play outdoors at Sherwood Park. For an indoor location, we have reserved Edison Johnson Rec Center in Northgate Park. It’s only available on Mondays. It’s also quite expensive and we can’t get the cost down until our cooperative agreement with Parks and Rec takes effect in the fall. So, we’re hoping to line up another public school gym like Lucas, which would be cheaper and possibly available on Tuesdays.</p>\r\n\r\n<p><strong>Who:</strong> We are actively recruiting new players. There is a chance we will have as many as 10 or 12 teams. If we grow that large, we’ll likely look for a way to create two divisions, grouping them by competitiveness.</p>\r\n\r\n<p><strong>Cost:</strong> Right now we are projecting the per-player cost to be in the neighborhood of $50. We may set a per-team price, too, for squads that prefer to be organized that way.</p>\r\n\r\n<h2 id=\"how-you-can-play-for-free\">How you can play for free</h2>\r\n\r\n<ul>\r\n\t<li><strong>Join our operations committee.</strong> We need a few people to help us set up games (put out the goals, inflate the balls, make sure the ref shows up) and break them down. We could also use help in other areas, such as translating our website into Spanish.</li>\r\n\t<li><strong>Help us with our futsal clinics.</strong> David Beck and David Fellerath will be organizing youth futsal clinics to be given at Park and Rec centers in September and October. If you can commit five or six hours to one of these clinics, drop us a line ASAP and I’ll give you more info. The key to our upcoming cooperative agreement with the city is putting on programs for kids. In return, our future facility expenses will be next to nothing. Please help if you can.</li>\r\n\t<li><strong>Recruit new players.</strong> Recruit two new players and play for free. Recruit one and play for half-price.</li>\r\n</ul>\r\n\r\n<p>Kosta and I hope to have the website updated and ready for registration within a couple of weeks. We’ll let you know when we’re ready to register.</p>\r\n\r\n<p>In the meantime, please let us know if you’re interested in the “play for free” options 1 or 2 above.</p>\r\n\r\n<p>See you soon! David &amp; Kosta</p>\r\n\r\n<h2 id=\"best-v\">Best V</h2>\r\n\r\n<ul>\r\n\t<li>Misael Gutierrez (Mattie’s)</li>\r\n\t<li>Nick Christie (McCabe’s)</li>\r\n\t<li>Dane Summerell (Freelancers)</li>\r\n\t<li>Daniel Seed (Motorco)</li>\r\n\t<li>Rob Weldon (Market Failure)</li>\r\n</ul>\r\n\r\n<h2 id=\"second-best-v\">Second-best V</h2>\r\n\r\n<ul>\r\n\t<li>Shawn Olender (Mattie’s)</li>\r\n\t<li>David Beck (Motorco)</li>\r\n\t<li>Finn Katz (Motorco)</li>\r\n\t<li>Oscar Barsallo (Market Failure)</li>\r\n\t<li>Wisdom Deku (All Stars)</li>\r\n</ul>\r\n\r\n<p>Congrats all!</p>\r\n",
+        "format": "basic_html",
+        "summary": ""
+      }
+    ],
+    "comment": [
+      {
+        "status": "2",
+        "cid": "0",
+        "last_comment_timestamp": "1445562415",
+        "last_comment_name": null,
+        "last_comment_uid": "1",
+        "comment_count": "0"
+      }
+    ],
+    "field_image": [
+      {
+        "target_id": "3",
+        "alt": "Last game of opening season at Sherwood Park",
+        "title": "",
+        "width": "800",
+        "height": "482",
+        "target_type": "file",
+        "target_uuid": "272157fe-9115-4486-be07-7e330c1ac396",
+        "url": "https://local.durhamatletico.com/sites/default/files/2015-10/blog-last-game.jpg"
+      }
+    ],
+    "field_tags": [
+      {
+        "target_id": "2",
+        "target_type": "taxonomy_term",
+        "target_uuid": "645cddeb-acca-495b-af05-5fe266a2efda",
+        "url": "/taxonomy/term/2"
+      },
+      {
+        "target_id": "1",
+        "target_type": "taxonomy_term",
+        "target_uuid": "46b97550-229a-45b2-a900-f83bcf4b7796",
+        "url": "/taxonomy/term/1"
+      }
+    ]
+  }
+]
+        </code></pre>
     </section>
 
     <section>
         <h2>6. Rest Resource Plugins</h2>
+        <pre><code class="php">
+&lt;?php
+
+namespace Drupal\durhamatletico_api\Plugin\rest\resource;
+
+use Drupal\rest\Plugin\ResourceBase;
+use Drupal\rest\ResourceResponse;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Drupal\node\Entity\Node;
+
+/**
+ * Provides a resource to get view modes by entity and bundle.
+ *
+ * @RestResource(
+ *   id = &quot;tournament_rest_resource&quot;,
+ *   label = @Translation(&quot;Tournaments for bracket display&quot;),
+ *   uri_paths = {
+ *     &quot;canonical&quot; = &quot;/api/tournaments/{nid}&quot;
+ *   }
+ * )
+ */
+class TournamentRestResource extends ResourceBase {
+
+  /**
+   * Responds to GET requests.
+   *
+   * Returns formatted output for use with bracket JS.
+   *
+   * @param int $nid
+   *   The node ID of the tournament, e.g. 1655.
+   *
+   * @return \Drupal\rest\ResourceResponse
+   *   The response containing the log entry.
+   *
+   * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+   *   Thrown when the tournament entry was not found.
+   * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+   *   Thrown when no tournament entry was provided.
+   */
+  public function get($nid = NULL) {
+    return new ResourceResponse($response);
+  }
+        </code></pre>
     </section>
 
     <section>
         <h2>7. Authentication plugins</h2>
     </section>
-
 
 
   </div><!-- slides -->
