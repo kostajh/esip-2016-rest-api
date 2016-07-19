@@ -7,7 +7,7 @@
   <title>REST and RDF in Drupal 8</title>
 
   <meta name="description"
-        content="REST and RDF capabilities of Drupal 8, presented at ESIP 2016">
+        content="REST capabilities of Drupal 8, presented at ESIP 2016">
   <meta name="author" content="Kosta Harlan">
 
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -47,14 +47,13 @@
 
     <!-- Title slide -->
     <section>
-      <h1>REST and RDF in Drupal 8</h1>
-      <h2>How machines can talk to Drupal</h2>
+      <h1>REST in Drupal 8</h1>
       <p class="centered">Kosta Harlan @ Savas Labs</p>
     </section>
 
     <!-- Introduction slide -->
     <section class="intro-slide">
-      <h2>A bit about us</h2>
+      <h2>A bit about me</h2>
       <p class="centered"></p>
       <div class="img-left">
         <img width="300" src="images/durham.jpg" alt="Durham skyline by Jessie Gladin Kramer">
@@ -69,142 +68,25 @@
 
     <section>
       <h2>What we'll discuss today</h2>
-      <ul>
-        <li class="fragment">Semantic Markup</li>
-        <ul>
-            <li class="fragment">A look at Schema.org mappings and RDF support in Drupal 8</li>
-        </ul>
-        <li class="fragment">Web services</li>
-        <aside class="notes">
-            <blockquote>A Web service is a software system designed to support interoperable machine-to-machine interaction over a network.</blockquote>
-        </aside>
-        <ul>
-            <li class="fragment">Implementing a REST API for a Drupal 8 site</li>
-        </ul>
-      </ul>
-    </section>
-
-    <section>
-        <section>
-          <h2>RDF and Schema.org mappings in D8</h2>
-          <h3 class="inline-heading">D7</h3>
-            <pre class="no-box-shadow"><code class="html" data-trim>
-&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; version=&quot;XHTML+RDFa 1.0&quot; dir=&quot;ltr&quot;
-  xmlns:content=&quot;http://purl.org/rss/1.0/modules/content/&quot;
-  xmlns:dc=&quot;http://purl.org/dc/terms/&quot;
-  xmlns:foaf=&quot;http://xmlns.com/foaf/0.1/&quot;
-  xmlns:og=&quot;http://ogp.me/ns#&quot;
-  xmlns:rdfs=&quot;http://www.w3.org/2000/01/rdf-schema#&quot;
-  xmlns:sioc=&quot;http://rdfs.org/sioc/ns#&quot;
-  xmlns:sioct=&quot;http://rdfs.org/sioc/types#&quot;
-  xmlns:skos=&quot;http://www.w3.org/2004/02/skos/core#&quot;
-  xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema#&quot;&gt;
-            </code></pre>
-
-            <h3 class="inline-heading">D8</h3>
-            <pre class="no-box-shadow"><code class="html" data-trim>
-&lt;html lang=&quot;en&quot; dir=&quot;ltr&quot; prefix=&quot;content: http://purl.org/rss/1.0/modules/content/
-dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/
-og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#
-schema: http://schema.org/  sioc: http://rdfs.org/sioc/ns#
-sioct: http://rdfs.org/sioc/types#
-skos: http://www.w3.org/2004/02/skos/core#
-xsd: http://www.w3.org/2001/XMLSchema# &quot;&gt;
-            </code></pre>
-        </section>
-        <section>
-          <h2>RDF and Schema.org mappings in D8</h2>
-            <pre><code class="html" data-trim>
-&lt;div id=&quot;node-1&quot; class=&quot;node node-article node-promoted node-full clearfix&quot;
-     about=&quot;/node/1&quot; typeof=&quot;sioc:Item foaf:Document&quot;&gt;
-    &lt;span property=&quot;dc:title&quot; content=&quot;Test&quot; class=&quot;rdf-meta element-hidden&quot;&gt;
-    &lt;/span&gt;
-    &lt;span property=&quot;sioc:num_replies&quot; content=&quot;0&quot;
-          datatype=&quot;xsd:integer&quot;
-          class=&quot;rdf-meta element-hidden&quot;&gt;&lt;/span&gt;
-&lt;div class=&quot;meta submitted&quot;&gt;
-  &lt;span property=&quot;dc:date dc:created&quot; content=&quot;2016-07-14T10:12:34-04:00&quot;
-        datatype=&quot;xsd:dateTime&quot; rel=&quot;sioc:has_creator&quot;&gt;
-      Submitted by
-      &lt;span class=&quot;username&quot; xml:lang=&quot;&quot; about=&quot;/user/1&quot;
-            typeof=&quot;sioc:UserAccount&quot; property=&quot;foaf:name&quot; datatype=&quot;&quot;&gt;
-            admin&lt;/span&gt; on Thu, 07/14/2016 - 10:12&lt;/span&gt;    &lt;/div&gt;
-  &lt;div class=&quot;content clearfix&quot;&gt;
-      &lt;div class=&quot;field field-name-body field-type-text-with-summary field-label-hidden&quot;&gt;
-          &lt;div class=&quot;field-items&quot;&gt;&lt;div class=&quot;field-item even&quot; property=&quot;content:encoded&quot;&gt;
-              &lt;p&gt;Hello&lt;/p&gt;
-&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;  &lt;/div&gt;
-    &lt;/div&gt;
-            </code></pre>
-        </section>
-        <section>
-          <h2>RDF and Schema.org mappings in D8</h2>
-            <pre><code data-trim class="html">
-&lt;article data-history-node-id=&quot;101&quot; role=&quot;article&quot; about=&quot;/node/101&quot;
-         typeof=&quot;schema:Article&quot; class=&quot;node node--type-article node--promoted node--view-mode-full clearfix&quot;&gt;
-&lt;header&gt;
-  &lt;span property=&quot;schema:name&quot; content=&quot;Test&quot; class=&quot;rdf-meta hidden&quot;&gt;&lt;/span&gt;
-  &lt;span property=&quot;schema:interactionCount&quot; content=&quot;UserComments:0&quot;
-        class=&quot;rdf-meta hidden&quot;&gt;&lt;/span&gt;
-&lt;div class=&quot;node__meta&quot;&gt;
-  &lt;article typeof=&quot;schema:Person&quot; about=&quot;/user/1&quot; class=&quot;profile&quot;&gt;
-  &lt;/article&gt;
-&lt;span&gt;
-    Submitted by &lt;span rel=&quot;schema:author&quot; class=&quot;field field--name-uid field--type-entity-reference field--label-hidden&quot;&gt;
-    &lt;span lang=&quot;&quot; about=&quot;/user/1&quot; typeof=&quot;schema:Person&quot;
-          property=&quot;schema:name&quot; datatype=&quot;&quot;&gt;admin&lt;/span&gt;&lt;/span&gt;
-    on &lt;span property=&quot;schema:dateCreated&quot; content=&quot;2016-07-14T14:22:07+00:00&quot;
-             class=&quot;field field--name-created field--type-created field--label-hidden&quot;&gt;
-        Thu, 07/14/2016 - 14:22&lt;/span&gt;
-        &lt;/span&gt;
-        &lt;span property=&quot;schema:dateCreated&quot; content=&quot;2016-07-14T14:22:07+00:00&quot;
-              class=&quot;rdf-meta hidden&quot;&gt;&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;/header&gt;
-  &lt;div class=&quot;node__content clearfix&quot;&gt;
-      &lt;div property=&quot;schema:text&quot; class=&quot;clearfix text-formatted field field--name-body field--type-text-with-summary field--label-hidden field__item&quot;&gt;
-          &lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt;
-      &lt;section rel=&quot;schema:comment&quot; class=&quot;field field--name-comment field--type-comment field--label-above comment-wrapper&quot;&gt;
-      &lt;/section&gt;
-  &lt;/div&gt;
-            &lt;/article&gt;
-            </code></pre>
-      </section>
-
-      <section>
-        <h2>RDF and Schema.org mappings in D8</h2>
-        <h3 class="fragment">Strengths</h3>
-          <ul>
-              <li class="fragment">Out of the box, things "just work" with basic mappings</li>
-              <li class="fragment">Core support for RDF means developers can rely on a stable API</li>
-          </ul>
-      </section>
-      <section>
-        <h2>RDF and Schema.org mappings in D8</h2>
-        <h3 class="fragment">Weaknesses</h3>
-          <ul class="compact-list">
-              <li class="fragment">Problems with mixing RDFa/microdata and HTML markup</li>
-              <ul>
-                  <li class="fragment">Complex</li>
-                  <li class="fragment">Field formatters need to be tested</li>
-                  <li class="fragment">Data is less accessible, you need a special parser</li>
-              </ul>
-              <li class="fragment">RDF in core hasn't been updated much since Schema.org mappings were added</li>
-              <li class="fragment">Development on RDF UI isn't moving quickly</li>
-              <li class="fragment">JSON-LD support is not planned for core, not yet anyway</li>
-          </ul>
-      </section>
-
+      <ol>
+          <li class="fragment">Brief look at the evolution of Drupal's REST capabilities</li>
+          <li class="fragment">Views and implementing a GET API for JSON/XML requests</li>
+          <li class="fragment">Using Drupal's RESTful API module with REST UI</li>
+          <li class="fragment">Self Documenting REST API</li>
+          <li class="fragment">Entity Query API</li>
+          <li class="fragment">Rest Resource Plugins</li>
+          <li class="fragment">Authentication plugins</li>
+      </ol>
     </section>
 
     <!-- Fragment styles -->
     <section>
       <section>
-        <h2>REST in D8</h2>
+        <h2>1. Web services + Drupal</h2>
         <h3>This isn't something new in Drupal</h3>
-        <pre><code class="hljs fragment" data-trim contenteditable>
-      commit 1b7510eebf0da114677408674e552201ff0711c9
-Author: Dries Buytaert <dries@buytaert.net>
+        <pre><code class="hljs fragment" data-trim>
+commit 1b7510eebf0da114677408674e552201ff0711c9
+Author: Dries Buytaert &lt;dries@buytaert.net&gt;
 Date:   Sun Sep 9 16:47:10 2001 +0000
 
     - Added an XML-RPC server.  Modules that want to export remote procedure
@@ -213,59 +95,43 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
       Example:
 
        function mymodule_xmlrpc() {
-         return array("drupal.myfunction" => array("function" => "mymodule_myfunction"));
+         return array(&quot;drupal.myfunction&quot; =&gt; array(&quot;function&quot; =&gt; &quot;mymodule_myfunction&quot;));
        }
         </code></pre>
 
       </section>
 
       <section>
-        <h2>REST in D8</h2>
-        <h3>Cast of characters</h3>
-          <ul>
-              <li>restui [contrib]</li>
-              <li>serialization</li>
-              <li>rest_api_doc [contrib]</li>
-              <li>rest</li>
-              <li>hal</li>
-              <li>basic_auth</li>
-              <li>simple_oauth [contrib]</li>
-          </ul>
+          <blockquote>In my view, we need to do the following [...] (1) facilitate a single robust REST module in core; (2) add functionality to help web services modules more easily query and manipulate Drupal's entity graph; (3) incorporate GraphQL and JSON API out of the box; and (4) add SDKs enabling easy integration with Drupal.</blockquote>
+      </section>
+      <section>
+<table>
+<tbody>
+<tr>
+<th>8.2 (Q4 2016)</th>
+<th>8.3 (Q2 2017)</th>
+<th>Beyond 8.3 (2017+)</th>
+</tr>
+<tr>
+<td>New REST API capabilities<br />Waterwheel initial release</td>
+<td>New REST API capabilities<br />JSON API module</td>
+<td>GraphQL module?<br />Entity graph iterator?</td>
+</tr>
+</tbody>
+</table>
       </section>
 
     </section>
 
     <section>
-        <section>
-          <h2 class="small-h2">Install Drupal & prepare a site</h2>
-          <video>
-                <source data-src="videos/install-drupal.webm" type="video/webm" />
-            </video>
-        </section>
-        <section>
-          <h2 class="small-h2">Install Drupal & prepare a site</h2>
-          <video>
-                <source data-src="videos/content-overview.webm" type="video/webm" />
-            </video>
-        </section>
-    </section>
-
-    <section>
-        <h2>Using Views</h2>
-        <video>
-            <source data-src="videos/article-page-view.webm"  type="video/webm" />
-        </video>
-    </section>
-
-    <section>
-        <h2>Using Views: Instant GET API</h2>
+        <h2>2. Views + REST: Create a GET API</h2>
         <video>
             <source data-src="videos/article-api-view.webm"  type="video/webm" />
         </video>
     </section>
 
     <section>
-        <h2>Using Views: Simplified</h2>
+        <h2>Views + REST: Using fields</h2>
         <video>
             <source data-src="videos/article-api-view-revised.webm"  type="video/webm" />
         </video>
@@ -273,13 +139,7 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
 
     <section>
         <section>
-          <h2 class="small-h2">Using Views: Multiple Formats</h2>
-          <video>
-                <source data-src="videos/request-different-formats.webm"  type="video/webm" />
-            </video>
-        </section>
-        <section>
-          <h2 class="small-h2">Using Views: Multiple Formats</h2>
+          <h2 class="small-h2">Views + REST: Multiple Formats</h2>
           <code>curl http://esip.demo:8888/api/articles?_format=json</code>
             <pre><code class="json" data-trim contenteditable>
 [
@@ -295,7 +155,7 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
             </code></pre>
         </section>
         <section>
-          <h2 class="small-h2">Using Views: Multiple Formats</h2>
+          <h2 class="small-h2">Views + REST: Multiple Formats</h2>
           <code>curl http://esip.demo:8888/api/articles?_format=xml</code>
 <pre><code class="xml" data-trim contenteditable>
 <?xml version="1.0"?>
@@ -314,18 +174,32 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
     </section>
 
     <section>
-        <h2>REST UI</h2>
+        <h2>3. RESTful Web Services module + REST UI</h2>
         <video>
             <source data-src="videos/rest-ui.webm"  type="video/webm" />
         </video>
     </section>
 
     <section>
-        <h2>Self-Documenting API</h2>
+        <h2>4.Self-Documenting API</h2>
         <video>
             <source data-src="videos/self-documenting.webm"  type="video/webm" />
         </video>
     </section>
+
+    <section>
+        <h2>5. Entiy Query API</h2>
+        
+    </section>
+
+    <section>
+        <h2>6. Rest Resource Plugins</h2>
+    </section>
+
+    <section>
+        <h2>7. Authentication plugins</h2>
+    </section>
+
 
 
   </div><!-- slides -->
