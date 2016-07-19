@@ -85,10 +85,10 @@
     </section>
 
     <section>
-        <h2>RDF and Schema.org mappings in D8</h2>
         <section>
-            <h3>D7</h3>
-            <pre><code class="html" data-trim>
+          <h2>RDF and Schema.org mappings in D8</h2>
+          <h3 class="inline-heading">D7</h3>
+            <pre class="no-box-shadow"><code class="html" data-trim>
 &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; version=&quot;XHTML+RDFa 1.0&quot; dir=&quot;ltr&quot;
   xmlns:content=&quot;http://purl.org/rss/1.0/modules/content/&quot;
   xmlns:dc=&quot;http://purl.org/dc/terms/&quot;
@@ -101,8 +101,8 @@
   xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema#&quot;&gt;
             </code></pre>
 
-            <h3>D8</h3>
-            <pre><code class="html" data-trim>
+            <h3 class="inline-heading">D8</h3>
+            <pre class="no-box-shadow"><code class="html" data-trim>
 &lt;html lang=&quot;en&quot; dir=&quot;ltr&quot; prefix=&quot;content: http://purl.org/rss/1.0/modules/content/
 dc: http://purl.org/dc/terms/  foaf: http://xmlns.com/foaf/0.1/
 og: http://ogp.me/ns#  rdfs: http://www.w3.org/2000/01/rdf-schema#
@@ -113,6 +113,7 @@ xsd: http://www.w3.org/2001/XMLSchema# &quot;&gt;
             </code></pre>
         </section>
         <section>
+          <h2>RDF and Schema.org mappings in D8</h2>
             <pre><code class="html" data-trim>
 &lt;div id=&quot;node-1&quot; class=&quot;node node-article node-promoted node-full clearfix&quot;
      about=&quot;/node/1&quot; typeof=&quot;sioc:Item foaf:Document&quot;&gt;
@@ -137,6 +138,7 @@ xsd: http://www.w3.org/2001/XMLSchema# &quot;&gt;
             </code></pre>
         </section>
         <section>
+          <h2>RDF and Schema.org mappings in D8</h2>
             <pre><code data-trim class="html">
 &lt;article data-history-node-id=&quot;101&quot; role=&quot;article&quot; about=&quot;/node/101&quot;
          typeof=&quot;schema:Article&quot; class=&quot;node node--type-article node--promoted node--view-mode-full clearfix&quot;&gt;
@@ -170,15 +172,17 @@ xsd: http://www.w3.org/2001/XMLSchema# &quot;&gt;
       </section>
 
       <section>
-          <h3 class="fragment">Strengths</h3>
+        <h2>RDF and Schema.org mappings in D8</h2>
+        <h3 class="fragment">Strengths</h3>
           <ul>
               <li class="fragment">Out of the box, things "just work" with basic mappings</li>
               <li class="fragment">Core support for RDF means developers can rely on a stable API</li>
           </ul>
       </section>
       <section>
-          <h3 class="fragment">Weaknesses</h3>
-          <ul>
+        <h2>RDF and Schema.org mappings in D8</h2>
+        <h3 class="fragment">Weaknesses</h3>
+          <ul class="compact-list">
               <li class="fragment">Problems with mixing RDFa/microdata and HTML markup</li>
               <ul>
                   <li class="fragment">Complex</li>
@@ -195,10 +199,9 @@ xsd: http://www.w3.org/2001/XMLSchema# &quot;&gt;
 
     <!-- Fragment styles -->
     <section>
-      <h2>REST in D8</h2>
-
       <section>
-          <h3>This isn't something new in Drupal</h3>
+        <h2>REST in D8</h2>
+        <h3>This isn't something new in Drupal</h3>
         <pre><code class="hljs fragment" data-trim contenteditable>
       commit 1b7510eebf0da114677408674e552201ff0711c9
 Author: Dries Buytaert <dries@buytaert.net>
@@ -212,12 +215,13 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
        function mymodule_xmlrpc() {
          return array("drupal.myfunction" => array("function" => "mymodule_myfunction"));
        }
-        </pre></code>
+        </code></pre>
 
       </section>
 
       <section>
-          <h3>Cast of characters</h3>
+        <h2>REST in D8</h2>
+        <h3>Cast of characters</h3>
           <ul>
               <li>restui [contrib]</li>
               <li>serialization</li>
@@ -232,14 +236,15 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
     </section>
 
     <section>
-        <h2>Install Drupal and prepare a site</h2>
         <section>
-            <video>
+          <h2 class="small-h2">Install Drupal & prepare a site</h2>
+          <video>
                 <source data-src="videos/install-drupal.webm" type="video/webm" />
             </video>
         </section>
         <section>
-            <video>
+          <h2 class="small-h2">Install Drupal & prepare a site</h2>
+          <video>
                 <source data-src="videos/content-overview.webm" type="video/webm" />
             </video>
         </section>
@@ -267,14 +272,15 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
     </section>
 
     <section>
-        <h2>Using Views: Multiple Formats</h2>
         <section>
-            <video>
+          <h2 class="small-h2">Using Views: Multiple Formats</h2>
+          <video>
                 <source data-src="videos/request-different-formats.webm"  type="video/webm" />
             </video>
         </section>
         <section>
-            <code>curl http://esip.demo:8888/api/articles?_format=json</code>
+          <h2 class="small-h2">Using Views: Multiple Formats</h2>
+          <code>curl http://esip.demo:8888/api/articles?_format=json</code>
             <pre><code class="json" data-trim contenteditable>
 [
     {
@@ -289,7 +295,8 @@ Date:   Sun Sep 9 16:47:10 2001 +0000
             </code></pre>
         </section>
         <section>
-            <code>curl http://esip.demo:8888/api/articles?_format=xml</code>
+          <h2 class="small-h2">Using Views: Multiple Formats</h2>
+          <code>curl http://esip.demo:8888/api/articles?_format=xml</code>
 <pre><code class="xml" data-trim contenteditable>
 <?xml version="1.0"?>
 <response>

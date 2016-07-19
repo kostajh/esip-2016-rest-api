@@ -314,6 +314,13 @@ body {
 .reveal .heading-color {
   color: #d0034e; }
 
+.reveal blockquote {
+  border-radius: 0 10px 10px 0;
+  color: #14133b;
+  padding: 15px;
+  background: rgba(244, 209, 166, 0.8);
+  text-align: left; }
+
 .reveal p code {
   background-color: #dcdcdc;
   border: 1px solid #070714;
@@ -323,13 +330,6 @@ body {
   font-size: .8em;
   margin: -1px 0 0;
   padding: 0 5px; }
-
-.reveal blockquote {
-  border-radius: 0 10px 10px 0;
-  color: #14133b;
-  padding: 15px;
-  background: rgba(244, 209, 166, 0.8);
-  text-align: left; }
 
 .reveal .no-border {
   background-color: #14133b;
@@ -351,3 +351,13 @@ body {
   font-size: .8em;
   margin-top: -20px;
   text-align: center; }
+
+.reveal .inline-heading {
+  float: left;
+  margin-right: .25em; }
+
+.reveal .no-box-shadow {
+  box-shadow: none; }
+
+.reveal .small-h2 {
+  font-size: 2em; }
